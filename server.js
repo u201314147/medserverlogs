@@ -232,5 +232,77 @@ async function start() {
         console.log(`🚀 API corriendo en http://localhost:${PORT}`);
     });
 }
+app.get('/games/finished/table', (req, res) => {
+    let html = `
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="utf-8">
+        <title>Games Finished</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                background: #f5f5f5;
+                padding: 20px;
+            }
+            table {
+                border-collapse: collapse;
+                width: 100%;
+                background: #fff;
+            }
+            th, td {
+                border: 1px solid #ddd;
+                padding: 8px;
+                text-align: left;
+            }
+            th {
+                background: #333;
+                color: white;
+            }
+            tr:nth-child(even) {
+                background: #f2f2f2;
+            }
+            .players {
+                font-size: 0.9em;
+                color: #444;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>🎮 Games Finalizados</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Game ID</th>
+                    <th>Inicio</th>
+                    <th>Fin</th>
+                    <th>Duración</th>
+                    <th>Jugadores</th>
+                </tr>
+            </thead>
+            <tbody>
+    `;
 
+    finishedGames.forEach(game => {
+        html += `
+            <tr>
+                <td>${game.gameId}</td>
+                <td>${game.createdAt}</td>
+                <td>${game.gameEnd}</td>
+                <td>${game.durationFormatted}</td>
+                <td class="players">${game.listPlayed.join(', ')}</td>
+            </tr>
+        `;
+    });
+
+    html += `
+            </tbody>
+        </table>
+    </body>
+    </html>
+    `;
+
+    res.setHeader('Content-Type', 'text/html');
+    res.send(html);
+});
 start();

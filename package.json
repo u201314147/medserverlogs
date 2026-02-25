@@ -12,5 +12,14 @@
   },
   "dependencies": {
     "express": "^5.2.1"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/u201314147/medserverlogs.git"
+  },
+  "keywords": [],
+  "bugs": {
+    "url": "https://github.com/u201314147/medserverlogs/issues"
+  },
+  "homepage": "https://github.com/u201314147/medserverlogs#readme"
 }
